@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Animación del perrito con corazones</title>
+	<link rel="stylesheet" href="styles.css">
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			background-color: #f0f0f0;
+			font-family: Arial, sans-serif;
+		}
+
+		.container {
+			position: relative;
+			text-align: center;
+		}
+
+		#dog {
+			font-size: 5rem;
+			animation: moveDog 5s infinite;
+		}
+
+		.hearts {
+			position: absolute;
+			top: 50px;
+			left: 50%;
+			transform: translateX(-50%);
+			animation: floatHearts 5s infinite;
+		}
+
+		#name {
+			font-size: 2rem;
+			color: #FF69B4;
+			margin-top: 20px;
+			opacity: 0;
+			animation: revealName 5s forwards;
+		}
+
+		@keyframes moveDog {
+			0% {
+				transform: translateX(-100px);
+			}
+
+			50% {
+				transform: translateX(100px);
+			}
+
+			100% {
+				transform: translateX(-100px);
+			}
+		}
+
+		@keyframes floatHearts {
+			0% {
+				opacity: 0;
+				transform: translateY(0);
+			}
+
+			50% {
+				opacity: 1;
+				transform: translateY(-50px);
+			}
+
+			100% {
+				opacity: 0;
+				transform: translateY(-100px);
+			}
+		}
+
+		@keyframes revealName {
+			0% {
+				opacity: 0;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div id="dog">
+			🐕
+		</div>
+		<div class="hearts"></div>
+		<div id="name">
+			<!-- Aquí se formará el nombre -->
+		</div>
+	</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			let hearts = document.querySelector('.hearts');
+			let name = document.getElementById('name');
+
+			// Animación de los corazones
+			for (let i = 0; i < 5; i++) {
+				let heart = document.createElement('div');
+				heart.innerHTML = '❤️';
+				heart.style.position = 'absolute';
+				heart.style.animation = `floatHearts ${Math.random() * 5 + 2}s infinite`;
+				heart.style.left = `${Math.random() * 100}%`;
+				hearts.appendChild(heart);
+			}
+
+			// Al final, se revela el nombre
+			setTimeout(() => {
+				name.innerHTML = 'Tu Nombre';
+			}, 3000);
+		});
+
+	</script>
+</body>
+
+</html>
